@@ -1,37 +1,36 @@
 CREATE SCHEMA IF NOT EXISTS vasilev_goncharov;
-CREATE TABLE vasilev_goncharov.Cars (
-  id integer PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS  vasilev_goncharov.Cars (
+  id  SERIAL PRIMARY KEY,
   number TEXT NOT NULL,
   stamp TEXT NOT NULL
 );
 
-CREATE TABLE vasilev_goncharov.Drivers (
-  id integer PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS vasilev_goncharov.Drivers (
+  id  SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   birthday timestamp NOT NULL,
-  balance integer NOT NULL,
+  balance float4 NOT NULL,
   passport TEXT
 );
 
-CREATE TABLE vasilev_goncharov.Customers (
-  id integer PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS vasilev_goncharov.Customers (
+  id  SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   birthday timestamp NOT NULL,
-  balance integer NOT NULL
+  balance float4 NOT NULL
 );
-
-CREATE TYPE vasilev_goncharov.trip_status AS ENUM (
+CREATE TYPE  vasilev_goncharov.trip_status AS ENUM (
     'pending',
     'in_progress',
     'completed',
     'canceled'
 );
 
-CREATE TABLE vasilev_goncharov.Orders (
-  id integer PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS vasilev_goncharov.Orders (
+  id  SERIAL  PRIMARY KEY,
   start_address TEXT NOT NULL,
   final_address TEXT NOT NULL,
-  cost integer NOT NULL,
+  cost float4 NOT NULL,
   order_time timestamp NOT NULL,
   end_time timestamp NOT NULL,
   car_id integer NOT NULL REFERENCES vasilev_goncharov.Cars(id),
